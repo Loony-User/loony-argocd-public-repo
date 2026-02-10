@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 replicaCount: 4
+=======
+replicaCount: 2
+>>>>>>> 3c60597 (Add Helm chart for nginx application)
 
 image:
   repository: nginx
