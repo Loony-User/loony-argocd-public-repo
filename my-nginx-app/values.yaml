@@ -1,18 +1,32 @@
-# Number of pod replicas
 replicaCount: 2
 
-# Container image
 image:
   repository: nginx
   pullPolicy: IfNotPresent
   tag: "1.21.0"
 
-# Service configuration
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: false
+  automount: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext: {}
+securityContext: {}
+
 service:
   type: ClusterIP
   port: 80
 
-# Resources
+ingress:
+  enabled: false
+
 resources:
   limits:
     cpu: 100m
@@ -21,28 +35,18 @@ resources:
     cpu: 100m
     memory: 128Mi
 
-# Service Account
-serviceAccount:
-  create: true
-  automount: true
-  annotations: {}
-  name: ""
-
-# Pod settings
-podAnnotations: {}
-podLabels: {}
-podSecurityContext: {}
-securityContext: {}
-
-# Ingress
-ingress:
-  enabled: false
-
-# Autoscaling
 autoscaling:
   enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
 
-# Node selector
+volumes: []
+volumeMounts: []
+
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+httpRoute:
+  enabled: false
